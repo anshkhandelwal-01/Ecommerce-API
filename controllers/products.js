@@ -9,7 +9,11 @@ module.exports.home = async function(req, res){
 module.exports.product = async function (req, res) {
     try {
         const products = await Product.find();
+        if(products[0]==null){
+            res.status(200).json({message: "Welcome to the home page!"});
+        }else{
         res.status(200).json(products);
+        }
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve products' });
     }
